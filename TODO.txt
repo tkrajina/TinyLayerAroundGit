@@ -1,0 +1,13 @@
+- "Choose branch" dialog
+- "Run git command" dialog
+	- odabir projekta
+	- na svim projektima ili samo na onim koji su izmijenjeni
+- "edit .gitignore" opcija
+- parsanje git naredbi	
+- ispis rezultata git naredbi u custom view
+- view sa statusom svih projekata
+- status svakog projekta
+- srediti da kontekstni meni radi na bilo kojem fajlu u projektu
+- refresh projekta nakon izvršene svake git naredbe
+- backup svih projekata
+- git gc na projektima

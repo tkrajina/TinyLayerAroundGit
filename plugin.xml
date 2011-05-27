@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="Test.contribution1"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IResource">
+         <menu
+               id="gitMenu"
+               label="git">
+            <separator
+                  name="gitGroup">
+            </separator>
+         </menu>
+         <action
+               class="tinylayeraroundgit.actions.GitGuiAction"
+               id="Test.action1"
+               label="git gui"
+               menubarPath="gitMenu/gitGroup">
+         </action>
+         <action
+               class="tinylayeraroundgit.actions.SwitchBranchAction"
+               id="TinyLayerAroundGit.action1"
+               label="Switch branch"
+               menubarPath="gitMenu/gitGroup">
+         </action>
+         <action
+               class="tinylayeraroundgit.actions.MergeBranchAction"
+               id="TinyLayerAroundGit.action2"
+               label="Merge branches"
+               menubarPath="gitMenu/gitGroup">
+         </action>
+         <action
+               class="tinylayeraroundgit.actions.RunGitCommandAction"
+               id="TinyLayerAroundGit.action3"
+               label="Run git command"
+               menubarPath="gitMenu/gitGroup">
+         </action>
+      </objectContribution>
+   </extension>
+   
+</plugin>
