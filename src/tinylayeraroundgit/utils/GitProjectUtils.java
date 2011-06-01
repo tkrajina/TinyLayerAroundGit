@@ -7,6 +7,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 
 import tinylayeraroundgit.git.GitCommand;
+import tinylayeraroundgit.git.GitCommandResult;
 
 
 public class GitProjectUtils {
@@ -31,7 +32,20 @@ public class GitProjectUtils {
 		GitCommand gitCommand = new GitCommand( "branch", false );
 		
 		try {
-			gitCommand.executeOn( project );
+			List<GitCommandResult> gitCommandResults = gitCommand.executeOn( project );
+			
+			for( GitCommandResult gitCommandResult : gitCommandResults ) {
+				
+				// TODO Extract this to method:
+				if( gitCommandResult.getExitCode() == 0 ) {
+					String[] lines = gitCommandResult.getStdout().split( "\n" );
+					for( String line : lines ) {
+						line = line.replaceAll( "^\\*\\s*", "" );
+						line = line.trim();
+						result.add( line );
+					}
+				}
+			}
 		} catch ( InterruptedException e ) {
 			e.printStackTrace();
 		}

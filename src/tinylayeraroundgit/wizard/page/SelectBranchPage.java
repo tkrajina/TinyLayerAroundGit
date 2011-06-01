@@ -46,7 +46,7 @@ public class SelectBranchPage extends WizardPage {
 		
 		List<String> branches = GitProjectUtils.getBranches( EclipseResourcesUtils.getProjects( selectedResources ) );
 		
-		TempDebug.print( branches );
+		TempDebug.print( "Branchevi:", branches );
 	}
 
 	public void setSelectedResources( List<IResource> selectedResources ) {
