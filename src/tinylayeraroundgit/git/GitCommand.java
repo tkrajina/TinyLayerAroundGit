@@ -20,18 +20,18 @@ public class GitCommand {
 		this.setRefreshProjest( refresh );
 	}
 	
-	public void executeOn( IResource selectedResource ) throws InterruptedException {
+	public List<GitCommandResult> executeOn( IResource selectedResource ) throws InterruptedException {
 		List<IResource> selection = new ArrayList<IResource>();
 		
 		selection.add( selectedResource );
 		
-		executeOn( selection );
+		return executeOn( selection );
 	}
 	
-	public void executeOn( List<IResource> selectedResources ) throws InterruptedException {
+	public List<GitCommandResult> executeOn( List<IResource> selectedResources ) throws InterruptedException {
 		GitCommandExecutor executor = new GitCommandExecutor( this, selectedResources );
 		
-		executor.execute();
+		return executor.execute();
 	}
 
 	public void setCommand( String command ) {

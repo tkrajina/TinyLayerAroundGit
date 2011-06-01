@@ -1,8 +1,8 @@
 package tinylayeraroundgit.git;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 
 import tinylayeraroundgit.utils.ProcessThread;
@@ -27,13 +27,18 @@ public class GitCommandExecutor {
 		this.setSelectedResources( selectedResources );
 	}
 	
-	public void execute() throws InterruptedException {
+	public List<GitCommandResult> execute() throws InterruptedException {
+		ArrayList<GitCommandResult> result = new ArrayList<GitCommandResult>();
+		
 		for( IResource file : getSelectedResources() ) { 
-			executeOn( file );
+			GitCommandResult gitCommandResult = executeOn( file );
+			result.add( gitCommandResult );
 		}
+		
+		return result;
 	}
 
-	private int executeOn( IResource file ) throws InterruptedException {
+	private GitCommandResult executeOn( IResource file ) throws InterruptedException {
 		String command = getGitCommand().getCommand();
 		
 		if( ! command.toLowerCase().trim().startsWith( "git" ) ) {
@@ -46,7 +51,7 @@ public class GitCommandExecutor {
 		
 		processThread.waitToEnd();
 		
-		return processThread.getExitValue();
+		return new GitCommandResult( processThread.getStdout(), processThread.getStderr(), processThread.getExitCode() );
 	}
 
 	private void setGitCommand( GitCommand gitCommand ) {

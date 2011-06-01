@@ -1,21 +1,24 @@
 package tinylayeraroundgit.utils;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 public class ProcessThread extends Thread {
     
-    private StringBuffer out = new StringBuffer();
+    private ByteArrayOutputStream stdout = new ByteArrayOutputStream();
+    private ByteArrayOutputStream stderr = new ByteArrayOutputStream();
     
     private boolean writeOutput = true;
 
     private String commandLine;
     private Process process;
 
-    private int exitValue;
+    private int exitCode;
 
 	private File path;
 
@@ -33,11 +36,11 @@ public class ProcessThread extends Thread {
 
         private InputStream is;
 
-        private String type;
+		private OutputStream out;
         
-        StreamGobbler( InputStream is, String type ) {
+        StreamGobbler( InputStream is, OutputStream out ) {
             this.is = is;
-            this.type = type;
+            this.out = out;
         }
 
         public void run() {
@@ -46,9 +49,9 @@ public class ProcessThread extends Thread {
                 BufferedReader br = new BufferedReader( isr );
                 String line = null;
                 while ( ( line = br.readLine() ) != null ) {
-                    System.out.println( type + ">" + line );
                     if( writeOutput ) {
-                        out.append( line ).append( '\n' );
+                        out.write( line.getBytes() );
+                        out.write( '\n' );
                     }
                 }
             }
@@ -65,13 +68,13 @@ public class ProcessThread extends Thread {
         try {
             this.process = Runtime.getRuntime().exec( commandLine, null, path );
 
-            StreamGobbler errorGobbler = new StreamGobbler( this.process.getErrorStream(), "STDERR" );
-            StreamGobbler outputGobbler = new StreamGobbler( this.process.getInputStream(), "STDOUT" );
+            StreamGobbler outputGobbler = new StreamGobbler( this.process.getInputStream(), this.stdout );
+            StreamGobbler errorGobbler = new StreamGobbler( this.process.getErrorStream(), this.stderr );
 
             errorGobbler.start();
             outputGobbler.start();
 
-            this.setExitValue( this.process.waitFor() );
+            this.setExitCode( this.process.waitFor() );
         }
         catch ( Exception e ) {
             System.err.println( e.getMessage() );
@@ -86,9 +89,12 @@ public class ProcessThread extends Thread {
         return this.process != null;
     }
 
-    /** The current output. */
-    public String getOutput() {
-        return out.toString();
+    public String getStdout() {
+    	return new String( this.stdout.toByteArray() );
+    }
+
+    public String getStderr() {
+    	return new String( this.stderr.toByteArray() );
     }
 
     /** Kills the process. */
@@ -105,7 +111,7 @@ public class ProcessThread extends Thread {
     	
         this.process.waitFor();
         
-        return getExitValue();
+        return getExitCode();
     }
     
     public void setWriteOutput( boolean writeOutput ) {
@@ -116,12 +122,12 @@ public class ProcessThread extends Thread {
         return writeOutput;
     }
 
-    private void setExitValue( int exitValue ) {
-        this.exitValue = exitValue;
+    private void setExitCode( int exitValue ) {
+        this.exitCode = exitValue;
     }
 
-    public int getExitValue() {
-        return exitValue;
+    public int getExitCode() {
+        return exitCode;
     }
     
 }
