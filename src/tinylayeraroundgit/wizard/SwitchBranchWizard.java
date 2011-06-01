@@ -6,35 +6,35 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.wizard.Wizard;
 
+import tinylayeraroundgit.wizard.page.BranchOptionsPage;
 import tinylayeraroundgit.wizard.page.SelectBranchPage;
 
 
-public class SwitchBranchWizard extends Wizard {
+public class SwitchBranchWizard extends AppWizard {
 	
-	private List<IResource> selectedResources;
-
-	public SwitchBranchWizard( List<IResource> selection ) {
-		super();
-		
-		setSelectedResources( selection );
+	public SwitchBranchWizard( List<IResource> selectedResources ) {
+		super( selectedResources );
 	}
 	
 	public void addPages() {
-		SelectBranchPage addressInfoPage = new SelectBranchPage( "Address Information", selectedResources );
+		SelectBranchPage addressInfoPage = new SelectBranchPage( 
+				"Select branch", 
+				"Select branch", 
+				"Please select (or enter) the branch you want to switch on", 
+				this );
 		addPage( addressInfoPage );
+		
+		BranchOptionsPage branchOptionsPage = new BranchOptionsPage(
+				"Branch options", 
+				"Branch options", 
+				"", 
+				this );
+		addPage( branchOptionsPage );
 	}
 
 	@Override
 	public boolean performFinish() {
 		return false;
-	}
-
-	public void setSelectedResources( List<IResource> selectedResources ) {
-		this.selectedResources = selectedResources;
-	}
-
-	public List<IResource> getSelectedResources() {
-		return selectedResources;
 	}
 
 }
