@@ -18,8 +18,9 @@ import org.eclipse.ui.IWorkbenchPart;
 import temp.TempDebug;
 import tinylayeraroundgit.git.GitCommand;
 import tinylayeraroundgit.git.GitCommandExecutor;
+import tinylayeraroundgit.utils.GitProjectUtils;
 
-public class GitGuiAction extends ObjectActionDelegate {
+public class GitGuiAction extends AbstractActionDelegate {
 	
 	/**
 	 * Constructor for Action1.
@@ -42,24 +43,16 @@ public class GitGuiAction extends ObjectActionDelegate {
 		
 		IProject project = projects.get( 0 );
 		
-		GitCommand gitCommand = new GitCommand( "gui", project, true );
-		
-		GitCommandExecutor gitCommandExecutor = new GitCommandExecutor( gitCommand );
+		GitCommand gitCommand = new GitCommand( "gui", true );
 		
 		try {
-			gitCommandExecutor.execute();
-		} catch ( InterruptedException e1 ) {
-			e1.printStackTrace();
+			gitCommand.executeOn( project );
+		} catch ( InterruptedException e ) {
+			e.printStackTrace();
 		}
 		
-		refreshProject( project );
+		GitProjectUtils.refrech( project );
 		
-//		TestWizard wizard = new TestWizard();
-//		WizardDialog dialog = new WizardDialog( shell, wizard );
-//		dialog.create();
-//		dialog.open();
-		
-//		File workspaceLocation = project.getWorkspace().getRoot().getLocation().toFile();
 	}
 
 }

@@ -1,11 +1,16 @@
 package tinylayeraroundgit.git;
 
-import org.eclipse.core.resources.IProject;
+import java.util.List;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 
 import tinylayeraroundgit.utils.ProcessThread;
 
 
 public class GitCommandExecutor {
+	
+	private List<IResource> selectedResources;
 	
 	private GitCommand gitCommand;
 	
@@ -15,24 +20,27 @@ public class GitCommandExecutor {
 //		gitCommandExecutor.execute();
 	}
 
-	public GitCommandExecutor( GitCommand gitCommand ) {
+	public GitCommandExecutor( GitCommand gitCommand, List<IResource> selectedResources ) {
+		super();
+		
 		this.setGitCommand( gitCommand );
+		this.setSelectedResources( selectedResources );
 	}
 	
 	public void execute() throws InterruptedException {
-		for( IProject project : gitCommand.getTargetProjects() ) {
-			executeOnProject( project );
+		for( IResource file : getSelectedResources() ) { 
+			executeOn( file );
 		}
 	}
 
-	private int executeOnProject( IProject project ) throws InterruptedException {
+	private int executeOn( IResource file ) throws InterruptedException {
 		String command = getGitCommand().getCommand();
 		
 		if( ! command.toLowerCase().trim().startsWith( "git" ) ) {
 			command = "git " + command;
 		}
 		
-		ProcessThread processThread = new ProcessThread( command, project.getLocation().toFile() );
+		ProcessThread processThread = new ProcessThread( command, file.getLocation().toFile() );
 		
 		processThread.start();
 		
@@ -49,6 +57,14 @@ public class GitCommandExecutor {
 
 	public GitCommand getGitCommand() {
 		return gitCommand;
+	}
+
+	public void setSelectedResources( List<IResource> selectedResources ) {
+		this.selectedResources = selectedResources;
+	}
+
+	public List<IResource> getSelectedResources() {
+		return selectedResources;
 	}
 			
 }

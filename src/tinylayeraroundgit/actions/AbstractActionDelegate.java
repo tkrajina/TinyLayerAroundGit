@@ -23,12 +23,12 @@ import tinylayeraroundgit.git.GitCommand;
 import tinylayeraroundgit.git.GitCommandExecutor;
 
 
-public abstract class ObjectActionDelegate implements IActionDelegate {
+public abstract class AbstractActionDelegate implements IActionDelegate {
 
 	private StructuredSelection structuredSelection;
 	private Shell shell;
 	
-	public ObjectActionDelegate() {
+	public AbstractActionDelegate() {
 		super();
 	}
 
@@ -53,14 +53,6 @@ public abstract class ObjectActionDelegate implements IActionDelegate {
 	
 	// Utility methods for actual implemetations:
 	
-	protected void refreshProject( IProject project ) {
-		try {
-			project.refreshLocal( IProject.DEPTH_INFINITE, null );
-		} catch ( CoreException e ) {
-			e.printStackTrace();
-		}
-	}
-
 	protected void openInformationDialog( String title, String message ) {
 		MessageDialog.openInformation( shell, title, message );
 	}
@@ -84,8 +76,8 @@ public abstract class ObjectActionDelegate implements IActionDelegate {
 		return result;
 	}
 	
-	protected List<IFile> getSelectedFiles() {
-		ArrayList<IFile> result = new ArrayList<IFile>();
+	protected List<IResource> getSelectedResources() {
+		ArrayList<IResource> result = new ArrayList<IResource>();
 		
 		if( getStructuredSelection() == null ) {
 			return result;
@@ -93,9 +85,8 @@ public abstract class ObjectActionDelegate implements IActionDelegate {
 		
 		List<?> selectedElements = structuredSelection.toList();
 		for( Object object : selectedElements ) {
-			if( object instanceof IFile ) {
-				IFile file = (IFile) object;
-				result.add( file );
+			if( object instanceof IResource ) {
+				result.add( (IResource) object );
 			}
 		}
 		

@@ -3,7 +3,7 @@ package tinylayeraroundgit.actions;
 import org.eclipse.jface.action.IAction;
 
 
-public class MergeBranchAction extends ObjectActionDelegate {
+public class MergeBranchAction extends AbstractActionDelegate {
 
 	@Override
 	public void run( IAction action ) {

@@ -3,34 +3,35 @@ package tinylayeraroundgit.git;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 
 public class GitCommand {
 	
 	private String command;
 	
-	private List<IProject> targetProjects = new ArrayList<IProject>();
-	
 	private boolean refreshProjest = false;
 	
-	public GitCommand( String command, List<IProject> targets, boolean refresh ) {
+	public GitCommand( String command, boolean refresh ) {
 		super();
 		
-		if( targets != null ) {
-			this.targetProjects.addAll( targets );
-		}
 		this.setCommand( command );
 		this.setRefreshProjest( refresh );
 	}
 	
-	public GitCommand( String command, IProject target, boolean refresh ) {
-		this( command, (List<IProject>) null, refresh );
+	public void executeOn( IResource selectedResource ) throws InterruptedException {
+		List<IResource> selection = new ArrayList<IResource>();
 		
-		this.addTarget( target );
+		selection.add( selectedResource );
+		
+		executeOn( selection );
 	}
 	
-	public void execute() {
+	public void executeOn( List<IResource> selectedResources ) throws InterruptedException {
+		GitCommandExecutor executor = new GitCommandExecutor( this, selectedResources );
 		
+		executor.execute();
 	}
 
 	public void setCommand( String command ) {
@@ -39,14 +40,6 @@ public class GitCommand {
 
 	public String getCommand() {
 		return command;
-	}
-
-	public void addTarget( IProject project ) {
-		this.targetProjects.add( project );
-	}
-
-	public List<IProject> getTargetProjects() {
-		return targetProjects;
 	}
 
 	public void setRefreshProjest( boolean refreshProjest ) {
