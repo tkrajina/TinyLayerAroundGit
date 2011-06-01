@@ -3,7 +3,6 @@ package tinylayeraroundgit.wizard.page;
 import java.util.List;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -11,28 +10,23 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import temp.TempDebug;
 import tinylayeraroundgit.utils.EclipseResourcesUtils;
 import tinylayeraroundgit.utils.GitProjectUtils;
+import tinylayeraroundgit.wizard.AppWizard;
+import tinylayeraroundgit.wizard.AppWizardPage;
 
-public class SelectBranchPage extends WizardPage {
+public class SelectBranchPage extends AppWizardPage {
 
 	Text state;
 	
-	private Combo branch;
+	private Combo branchCombo;
 	
-	private List<IResource> selectedResources;
-
-	public SelectBranchPage( String pageName, List<IResource> selectedResources ) {
-		super( pageName );
-		
-		setTitle( "Address Information" );
-		setDescription( "Please enter your address information" );
-		
-		setSelectedResources( selectedResources );
+	public SelectBranchPage( String pageName, String title, String description, AppWizard appWizard ) {
+		super( pageName, title, description, appWizard );
 	}
 
 	public void createControl( Composite parent ) {
+		
 		Composite composite = new Composite( parent, SWT.NONE );
 		
 		GridLayout layout = new GridLayout();
@@ -42,19 +36,13 @@ public class SelectBranchPage extends WizardPage {
 		setControl( composite );
 		
 		new Label( composite, SWT.NONE ).setText( "Select branch:" );
-		branch = new Combo( composite, SWT.NONE );
+		branchCombo = new Combo( composite, SWT.NONE );
 		
-		List<String> branches = GitProjectUtils.getBranches( EclipseResourcesUtils.getProjects( selectedResources ) );
+		List<String> branches = GitProjectUtils.getBranches( EclipseResourcesUtils.getProjects( getAppWizard().getSelectedResources() ) );
 		
-		TempDebug.print( "Branchevi:", branches );
+		for( String branch : branches ) {
+			branchCombo.add( branch );
+		}
 	}
 
-	public void setSelectedResources( List<IResource> selectedResources ) {
-		this.selectedResources = selectedResources;
-	}
-
-	public List<IResource> getSelectedResources() {
-		return selectedResources;
-	}
-	
 }
