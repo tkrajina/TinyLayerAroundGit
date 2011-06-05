@@ -44,5 +44,9 @@ public class SelectBranchPage extends AppWizardPage {
 			branchCombo.add( branch );
 		}
 	}
+	
+	public String getSelectedBranch() {
+		return branchCombo.getText();
+	}
 
 }
