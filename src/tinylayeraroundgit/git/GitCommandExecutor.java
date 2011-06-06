@@ -3,10 +3,13 @@ package tinylayeraroundgit.git;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 
+import temp.TempDebug;
 import tinylayeraroundgit.utils.ConsoleHelper;
 import tinylayeraroundgit.utils.ProcessThread;
 
@@ -49,6 +52,9 @@ public class GitCommandExecutor {
 		}
 		
 		ConsoleHelper consoleHelper = ConsoleHelper.getInstance();
+		IProject project = file.getProject();
+		IPath projectRelativePath = file.getProjectRelativePath();
+		consoleHelper.writeToConsole( "[" + project.getName() + "::" + projectRelativePath + "]", SWT.COLOR_GRAY );
 		consoleHelper.writeToConsole( command, SWT.COLOR_BLACK );
 		
 		ProcessThread processThread = new ProcessThread( command, file.getLocation().toFile() );
