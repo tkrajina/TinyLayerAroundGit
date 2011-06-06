@@ -25,9 +25,17 @@ public class ProcessThread extends Thread {
     public ProcessThread( String commandLine, File path ) {
         this.commandLine = commandLine;
         this.path = path;
+        
+        correctPath();
     }
     
-    /**
+    private void correctPath() {
+    	if( path.isFile() ) {
+    		path = path.getParentFile();
+    	}
+	}
+
+	/**
      * Without this class the process on Windows hangs...
      * 
      * @author Tomo Krajina
