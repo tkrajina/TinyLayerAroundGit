@@ -16,15 +16,15 @@
             </separator>
          </menu>
          <action
-               class="tinylayeraroundgit.actions.GitGuiAction"
-               id="Test.action1"
-               label="git gui"
+               class="tinylayeraroundgit.actions.GcCommandAction"
+               id="TinyLayerAroundGit.action2"
+               label="Git gc"
                menubarPath="gitMenu/gitGroup">
          </action>
          <action
-               class="tinylayeraroundgit.actions.SwitchBranchAction"
+               class="tinylayeraroundgit.actions.EditGitignoreCommandAction"
                id="TinyLayerAroundGit.action1"
-               label="Switch branch"
+               label="Edit .gitignore"
                menubarPath="gitMenu/gitGroup">
          </action>
          <action
@@ -34,9 +34,21 @@
                menubarPath="gitMenu/gitGroup">
          </action>
          <action
+               class="tinylayeraroundgit.actions.SwitchBranchAction"
+               id="TinyLayerAroundGit.action1"
+               label="Switch branch"
+               menubarPath="gitMenu/gitGroup">
+         </action>
+         <action
                class="tinylayeraroundgit.actions.RunGitCommandAction"
                id="TinyLayerAroundGit.action3"
                label="Run git command"
+               menubarPath="gitMenu/gitGroup">
+         </action>
+         <action
+               class="tinylayeraroundgit.actions.GitGuiAction"
+               id="Test.action1"
+               label="git gui"
                menubarPath="gitMenu/gitGroup">
          </action>
       </objectContribution>
