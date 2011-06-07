@@ -39,7 +39,7 @@ public class MergeBranchWizard extends AppWizard {
 			MessageDialog.openInformation( getShell(), "Invalid branch", "Invalid branch:" + branchName );
 		}
 		
-		GitCommand gitCommand = new GitCommand( "merge " + branchName, true );
+		GitCommand gitCommand = new GitCommand( "merge " + branchName );
 		
 		try {
 			gitCommand.executeOn( getSelectedResources(), true );

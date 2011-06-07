@@ -41,17 +41,18 @@ public class GitGuiAction extends AbstractActionDelegate {
 			return;
 		}
 		
-		IProject project = projects.get( 0 );
-		
-		GitCommand gitCommand = new GitCommand( "gui", true );
-		
-		try {
-			gitCommand.executeOn( project, true );
-		} catch ( InterruptedException e ) {
-			e.printStackTrace();
-		}
+		for( IProject project : projects ) {
+			GitCommand gitCommand = new GitCommand( "gui" );
+			
+			try {
+				gitCommand.executeOn( project, true );
+			} catch ( InterruptedException e ) {
+				e.printStackTrace();
+			}
 		
 		GitProjectUtils.refresh( project );
+		
+		}
 		
 	}
 

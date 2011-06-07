@@ -29,7 +29,7 @@ public class GitProjectUtils {
 		
 		ArrayList<String> result = new ArrayList<String>();
 		
-		GitCommand gitCommand = new GitCommand( "branch", false );
+		GitCommand gitCommand = new GitCommand( "branch" );
 		
 		try {
 			List<GitCommandResult> gitCommandResults = gitCommand.executeOn( project, true );

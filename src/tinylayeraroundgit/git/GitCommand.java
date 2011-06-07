@@ -9,7 +9,7 @@ public class GitCommand {
 	
 	private String command;
 	
-	public GitCommand( String command, boolean refresh ) {
+	public GitCommand( String command ) {
 		super();
 		
 		this.setCommand( command );

@@ -48,7 +48,7 @@ public class SwitchBranchWizard extends AppWizard {
 			MessageDialog.openInformation( getShell(), "Invalid branch", "Invalid branch:" + branchName );
 		}
 		
-		GitCommand gitCommand = new GitCommand( "checkout " + branchName, true );
+		GitCommand gitCommand = new GitCommand( "checkout " + branchName );
 		
 		try {
 			gitCommand.executeOn( getSelectedResources(), true );

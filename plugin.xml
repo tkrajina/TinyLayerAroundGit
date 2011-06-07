@@ -40,9 +40,15 @@
                menubarPath="gitMenu/gitGroup">
          </action>
          <action
+               class="tinylayeraroundgit.actions.RunGitCommandIfChangedAction"
+               id="TinyLayerAroundGit.action1"
+               label="Run command (if pending changes)"
+               menubarPath="gitMenu/gitGroup">
+         </action>
+         <action
                class="tinylayeraroundgit.actions.RunGitCommandAction"
                id="TinyLayerAroundGit.action3"
-               label="Run git command"
+               label="Run command"
                menubarPath="gitMenu/gitGroup">
          </action>
          <action

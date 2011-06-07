@@ -14,7 +14,7 @@ public class GcCommandAction extends AbstractActionDelegate {
 
 	@Override
 	public void run( IAction action ) {
-		GitCommand gitCommand = new GitCommand( "gc", true );
+		GitCommand gitCommand = new GitCommand( "gc" );
 		
 		try {
 			gitCommand.executeOn( getSelectedResources(), false );
