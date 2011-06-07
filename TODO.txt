@@ -1,3 +1,4 @@
+- project refreshing (not executed at all!)
 - "Choose branch" dialog
 - "Run git command" dialog
 	- odabir projekta
@@ -11,3 +12,4 @@
 - refresh projekta nakon izvršene svake git naredbe
 - backup svih projekata
 - git gc na projektima
+- push, pull
