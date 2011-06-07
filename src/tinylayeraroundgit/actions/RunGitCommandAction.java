@@ -17,10 +17,6 @@ public class RunGitCommandAction extends AbstractActionDelegate {
 				return "Invalid git command";
 			}
 			
-			if( ! newText.startsWith( "git " ) ) {
-				return "Your command must start with \"git \"";
-			}
-			
 			return null;
 		}
 		
@@ -28,7 +24,7 @@ public class RunGitCommandAction extends AbstractActionDelegate {
 
 	@Override
 	public void run( IAction action ) {
-		InputDialog dialog = new InputDialog( getShell(), "Git command", "Git command", "git ", new GitCommandInputValidator() );
+		InputDialog dialog = new InputDialog( getShell(), "Git command", "Git command", "status", new GitCommandInputValidator() );
 		
 		dialog.create();
 		dialog.open();
@@ -39,7 +35,7 @@ public class RunGitCommandAction extends AbstractActionDelegate {
 			GitCommand gitCommand = new GitCommand( command, true );
 			
 			try {
-				gitCommand.executeOn( getSelectedResources() );
+				gitCommand.executeOn( getSelectedResources(), true );
 			} catch ( InterruptedException e ) {
 				e.printStackTrace();
 			}

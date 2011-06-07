@@ -51,7 +51,7 @@ public class SwitchBranchWizard extends AppWizard {
 		GitCommand gitCommand = new GitCommand( "checkout " + branchName, true );
 		
 		try {
-			gitCommand.executeOn( getSelectedResources() );
+			gitCommand.executeOn( getSelectedResources(), true );
 			
 			return true;
 		} catch ( InterruptedException e ) {

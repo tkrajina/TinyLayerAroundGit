@@ -14,7 +14,7 @@ public class GitProjectUtils {
 	
 	private GitProjectUtils() {}
 	
-	public static void refrech( IProject project ) {
+	public static void refresh( IProject project ) {
 		try {
 			project.refreshLocal( IProject.DEPTH_INFINITE, null );
 		} catch ( CoreException e ) {
@@ -32,7 +32,7 @@ public class GitProjectUtils {
 		GitCommand gitCommand = new GitCommand( "branch", false );
 		
 		try {
-			List<GitCommandResult> gitCommandResults = gitCommand.executeOn( project );
+			List<GitCommandResult> gitCommandResults = gitCommand.executeOn( project, true );
 			
 			for( GitCommandResult gitCommandResult : gitCommandResults ) {
 				

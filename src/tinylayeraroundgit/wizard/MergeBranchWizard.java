@@ -42,7 +42,7 @@ public class MergeBranchWizard extends AppWizard {
 		GitCommand gitCommand = new GitCommand( "merge " + branchName, true );
 		
 		try {
-			gitCommand.executeOn( getSelectedResources() );
+			gitCommand.executeOn( getSelectedResources(), true );
 			
 			return true;
 		} catch ( InterruptedException e ) {

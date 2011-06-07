@@ -11,6 +11,7 @@ import org.eclipse.swt.graphics.Color;
 
 import temp.TempDebug;
 import tinylayeraroundgit.utils.ConsoleHelper;
+import tinylayeraroundgit.utils.GitProjectUtils;
 import tinylayeraroundgit.utils.ProcessThread;
 
 
@@ -33,12 +34,18 @@ public class GitCommandExecutor {
 		this.setSelectedResources( selectedResources );
 	}
 	
-	public List<GitCommandResult> execute() throws InterruptedException {
+	public List<GitCommandResult> execute(boolean refreshProject) throws InterruptedException {
 		ArrayList<GitCommandResult> result = new ArrayList<GitCommandResult>();
 		
 		for( IResource file : getSelectedResources() ) { 
 			GitCommandResult gitCommandResult = executeOn( file );
 			result.add( gitCommandResult );
+			
+			if( refreshProject ) {
+				IProject project = file.getProject();
+				
+				GitProjectUtils.refresh( project );
+			}
 		}
 		
 		return result;
@@ -54,7 +61,7 @@ public class GitCommandExecutor {
 		ConsoleHelper consoleHelper = ConsoleHelper.getInstance();
 		IProject project = file.getProject();
 		IPath projectRelativePath = file.getProjectRelativePath();
-		consoleHelper.writeToConsole( "[" + project.getName() + "::" + projectRelativePath + "]", SWT.COLOR_GRAY );
+		consoleHelper.writeToConsole( "[" + project.getName() + ":" + projectRelativePath + "]", SWT.COLOR_GRAY );
 		consoleHelper.writeToConsole( command, SWT.COLOR_BLACK );
 		
 		ProcessThread processThread = new ProcessThread( command, file.getLocation().toFile() );

@@ -1,13 +1,10 @@
 package tinylayeraroundgit.wizard.page;
 
-import java.util.List;
-
-import org.eclipse.core.resources.IResource;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
 import tinylayeraroundgit.utils.EclipseResourcesUtils;
@@ -19,7 +16,7 @@ public class SelectBranchPage extends AppWizardPage {
 
 	Text state;
 	
-	private Combo branchCombo;
+	private List branchList;
 	
 	public SelectBranchPage( String pageName, String title, String description, AppWizard appWizard ) {
 		super( pageName, title, description, appWizard );
@@ -36,17 +33,23 @@ public class SelectBranchPage extends AppWizardPage {
 		setControl( composite );
 		
 		new Label( composite, SWT.NONE ).setText( "Select branch:" );
-		branchCombo = new Combo( composite, SWT.NONE );
+		branchList = new List( composite, SWT.SINGLE );
 		
-		List<String> branches = GitProjectUtils.getBranches( EclipseResourcesUtils.getProjects( getAppWizard().getSelectedResources() ) );
+		java.util.List<String> branches = GitProjectUtils.getBranches( EclipseResourcesUtils.getProjects( getAppWizard().getSelectedResources() ) );
 		
 		for( String branch : branches ) {
-			branchCombo.add( branch );
+			branchList.add( branch );
 		}
 	}
 	
 	public String getSelectedBranch() {
-		return branchCombo.getText();
+		String[] selection = branchList.getSelection();
+		
+		if( selection == null || selection.length == 0 ) {
+			return null;
+		}
+		
+		return selection[ 0 ];
 	}
 
 }
