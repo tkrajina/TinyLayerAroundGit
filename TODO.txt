@@ -1,15 +1,29 @@
-- project refreshing (not executed at all!)
-- "Choose branch" dialog
-- "Run git command" dialog
-	- odabir projekta
-	- na svim projektima ili samo na onim koji su izmijenjeni
-- "edit .gitignore" opcija
-- parsanje git naredbi	
-- ispis rezultata git naredbi u custom view
-- view sa statusom svih projekata
-- status svakog projekta
-- srediti da kontekstni meni radi na bilo kojem fajlu u projektu
-- refresh projekta nakon izvršene svake git naredbe
-- backup svih projekata
-- git gc na projektima
+- "Working" icon while git command is executing
+- blue instead of green in console
+- clear console for every git run
+- show current branches for selection
+- "add to .gitignore" for file
+- backup all git projects
 - push, pull
+- open conflict files after merge
+- branch management
+	- add branch
+	- remove branch
+	- list remote branches
+	- remove remote branches
+	- rename branch
+- file history
+	- diff of two versions of file
+- checkout file from another branch
+- context menu on working sets
+- custom (user added) git command in menu
+- when switching branches -- show the current branch(es)
+
+DONE:
+- show current branch on top of list
+- "edit .gitignore" command
+- "Run git command" command
+- "Choose branch" dialog
+- menu on every project file
+- git gc
+- project refreshing (not executed at all!)

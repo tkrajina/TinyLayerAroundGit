@@ -40,9 +40,15 @@ public class GitProjectUtils {
 				if( gitCommandResult.getExitCode() == 0 ) {
 					String[] lines = gitCommandResult.getStdout().split( "\n" );
 					for( String line : lines ) {
-						line = line.replaceAll( "^\\*\\s*", "" );
-						line = line.trim();
-						result.add( line );
+						if( line.trim().startsWith( "*" ) ) {
+							line = line.replaceAll( "^\\*\\s*", "" );
+							line = line.trim();
+							result.add( 0, line );
+						}
+						else {
+							line = line.trim();
+							result.add( line );
+						}
 					}
 				}
 			}
