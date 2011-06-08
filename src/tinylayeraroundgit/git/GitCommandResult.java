@@ -4,7 +4,7 @@ import org.eclipse.core.resources.IFile;
 
 /**
  * TODO Javadoc
- * TODO References to {@link IFile} and {@link GitCommand}
+ * TODO References to {@link IFile} and {@link Command}
  * 
  * @author Tomo Krajina
  */

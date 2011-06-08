@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.eclipse.core.resources.IResource;
 
-public class GitCommand {
+public class Command {
 	
 	private String command;
 	
-	public GitCommand( String command ) {
+	public Command( String command ) {
 		super();
 		
 		this.setCommand( command );

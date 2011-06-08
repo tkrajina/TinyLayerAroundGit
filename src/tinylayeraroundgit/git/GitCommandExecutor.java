@@ -19,7 +19,7 @@ public class GitCommandExecutor {
 	
 	private List<IResource> selectedResources;
 	
-	private GitCommand gitCommand;
+	private Command gitCommand;
 	
 	public static void main( String[] args ) throws Exception {
 //		GitCommandExecutor gitCommandExecutor = new GitCommandExecutor( new GitCommand( "gui" ) );
@@ -27,7 +27,7 @@ public class GitCommandExecutor {
 //		gitCommandExecutor.execute();
 	}
 
-	public GitCommandExecutor( GitCommand gitCommand, List<IResource> selectedResources ) {
+	public GitCommandExecutor( Command gitCommand, List<IResource> selectedResources ) {
 		super();
 		
 		this.setGitCommand( gitCommand );
@@ -70,19 +70,19 @@ public class GitCommandExecutor {
 		
 		processThread.waitToEnd();
 		
-		consoleHelper.writeToConsole( processThread.getStdout(), SWT.COLOR_GREEN );
+		consoleHelper.writeToConsole( processThread.getStdout(), SWT.COLOR_BLUE );
 		consoleHelper.writeToConsole( processThread.getStderr(), SWT.COLOR_RED );
 		
 		return new GitCommandResult( processThread.getStdout(), processThread.getStderr(), processThread.getExitCode() );
 	}
 
-	private void setGitCommand( GitCommand gitCommand ) {
+	private void setGitCommand( Command gitCommand ) {
 		assert gitCommand != null;
 		
 		this.gitCommand = gitCommand;
 	}
 
-	public GitCommand getGitCommand() {
+	public Command getGitCommand() {
 		return gitCommand;
 	}
 

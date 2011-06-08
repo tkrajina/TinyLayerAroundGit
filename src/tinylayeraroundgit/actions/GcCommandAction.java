@@ -3,7 +3,7 @@ package tinylayeraroundgit.actions;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 
-import tinylayeraroundgit.git.GitCommand;
+import tinylayeraroundgit.git.Command;
 
 
 public class GcCommandAction extends AbstractActionDelegate {
@@ -14,7 +14,7 @@ public class GcCommandAction extends AbstractActionDelegate {
 
 	@Override
 	public void run( IAction action ) {
-		GitCommand gitCommand = new GitCommand( "gc" );
+		Command gitCommand = new Command( "git gc" );
 		
 		try {
 			gitCommand.executeOn( getSelectedResources(), false );

@@ -16,6 +16,12 @@
             </separator>
          </menu>
          <action
+               class="tinylayeraroundgit.actions.GitkAction"
+               id="TinyLayerAroundGit.action1"
+               label="gitk"
+               menubarPath="gitMenu/gitGroup">
+         </action>
+         <action
                class="tinylayeraroundgit.actions.GcCommandAction"
                id="TinyLayerAroundGit.action2"
                label="Git gc"

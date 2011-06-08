@@ -8,7 +8,7 @@ import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 
-import tinylayeraroundgit.git.GitCommand;
+import tinylayeraroundgit.git.Command;
 import tinylayeraroundgit.git.GitCommandResult;
 
 
@@ -45,9 +45,12 @@ public class RunGitCommandAction extends AbstractActionDelegate {
 		dialog.open();
 		
 		String command = dialog.getValue();
+		if( ! command.startsWith( "git " ) ) {
+			command = "git " + command;
+		}
 		
 		if( command != null ) {
-			GitCommand gitCommand = new GitCommand( command );
+			Command gitCommand = new Command( command );
 			
 			try {
 				// TODO: Change this, add asbtract method!
@@ -68,7 +71,7 @@ public class RunGitCommandAction extends AbstractActionDelegate {
 	}
 
 	private boolean isChanged( IProject project ) {
-		GitCommand gitCommand = new GitCommand( "status --porcelain" );
+		Command gitCommand = new Command( "git status --porcelain" );
 		
 		try {
 			List<GitCommandResult> results = gitCommand.executeOn( project, false );

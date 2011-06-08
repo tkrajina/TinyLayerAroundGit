@@ -16,7 +16,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
 import temp.TempDebug;
-import tinylayeraroundgit.git.GitCommand;
+import tinylayeraroundgit.git.Command;
 import tinylayeraroundgit.git.GitCommandExecutor;
 import tinylayeraroundgit.utils.GitProjectUtils;
 
@@ -42,7 +42,7 @@ public class GitGuiAction extends AbstractActionDelegate {
 		}
 		
 		for( IProject project : projects ) {
-			GitCommand gitCommand = new GitCommand( "gui" );
+			Command gitCommand = new Command( "git gui" );
 			
 			try {
 				gitCommand.executeOn( project, true );

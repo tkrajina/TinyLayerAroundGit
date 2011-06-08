@@ -6,7 +6,7 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 
-import tinylayeraroundgit.git.GitCommand;
+import tinylayeraroundgit.git.Command;
 import tinylayeraroundgit.git.GitCommandResult;
 
 
@@ -29,7 +29,7 @@ public class GitProjectUtils {
 		
 		ArrayList<String> result = new ArrayList<String>();
 		
-		GitCommand gitCommand = new GitCommand( "branch" );
+		Command gitCommand = new Command( "git branch" );
 		
 		try {
 			List<GitCommandResult> gitCommandResults = gitCommand.executeOn( project, true );

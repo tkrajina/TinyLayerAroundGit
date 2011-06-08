@@ -19,7 +19,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
 import temp.TempDebug;
-import tinylayeraroundgit.git.GitCommand;
+import tinylayeraroundgit.git.Command;
 import tinylayeraroundgit.git.GitCommandExecutor;
 
 

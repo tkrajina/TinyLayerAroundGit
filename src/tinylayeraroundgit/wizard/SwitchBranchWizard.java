@@ -6,7 +6,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 import temp.TempDebug;
-import tinylayeraroundgit.git.GitCommand;
+import tinylayeraroundgit.git.Command;
 import tinylayeraroundgit.wizard.page.SelectBranchPage;
 
 
@@ -48,7 +48,7 @@ public class SwitchBranchWizard extends AppWizard {
 			MessageDialog.openInformation( getShell(), "Invalid branch", "Invalid branch:" + branchName );
 		}
 		
-		GitCommand gitCommand = new GitCommand( "checkout " + branchName );
+		Command gitCommand = new Command( "git checkout " + branchName );
 		
 		try {
 			gitCommand.executeOn( getSelectedResources(), true );

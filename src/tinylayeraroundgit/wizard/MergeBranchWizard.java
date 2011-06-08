@@ -6,7 +6,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 import temp.TempDebug;
-import tinylayeraroundgit.git.GitCommand;
+import tinylayeraroundgit.git.Command;
 import tinylayeraroundgit.wizard.page.SelectBranchPage;
 
 
@@ -39,7 +39,7 @@ public class MergeBranchWizard extends AppWizard {
 			MessageDialog.openInformation( getShell(), "Invalid branch", "Invalid branch:" + branchName );
 		}
 		
-		GitCommand gitCommand = new GitCommand( "merge " + branchName );
+		Command gitCommand = new Command( "git merge " + branchName );
 		
 		try {
 			gitCommand.executeOn( getSelectedResources(), true );

@@ -18,8 +18,10 @@
 - context menu on working sets
 - custom (user added) git command in menu
 - when switching branches -- show the current branch(es)
+- scrollbars on branch list
 
 DONE:
+- gitk
 - show current branch on top of list
 - "edit .gitignore" command
 - "Run git command" command
